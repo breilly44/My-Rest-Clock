@@ -1,0 +1,24 @@
+Arduino my_rest_clock
+
+The goal of this mini project is to create a clock for resting in between workout sets
+This circuit uses a push button to start the clock, and a piezo device as a ringer for when the rest time is up.
+
+rest_time - variable to represent the rest time in between exercises (in milliseconds)
+note_time - variable to represent the duration of the ringer for the clock (in milliseconds)
+note - frequency at which the ringer tone is sent to piezo device
+keyVal - input variable for push button. Its value is dependent upon the voltage across the push button (1023 in this case)
+threshold - this variable is used for comparison to determine whether or not the push button has been pressed and timer should start
+debounce_delay - Push buttons sometimes 'bounce' and cause multiple triggers, this variable is used for bounce error checking
+
+An if statement is used to start and stop the clock in the loop function
+The logic goes as
+- if the push button has been pressed
+	- briefly delay for push button bounce (error checking)
+	- delay for requested rest_time (start rest clock)
+	- send note to piezo (timer ringer)
+	- delay for the note time (hold note for brief time)
+	- stop the ringer
+- else
+	- stop the ringer
+
+The delay() function is used as a blocking function to stop the CPU from performing other tasks until the specified time is up
